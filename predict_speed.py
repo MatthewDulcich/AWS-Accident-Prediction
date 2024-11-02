@@ -2,6 +2,7 @@ import cv2
 from ultralytics.solutions import SpeedEstimator
 from numpy import mean
 from pandas import DataFrame
+import time
 
 # Choose video and create name for output files
 input_video_file = "cctv052x2004080516x01638.avi"
@@ -20,20 +21,27 @@ video_writer = cv2.VideoWriter(output_video_file, cv2.VideoWriter_fourcc(*"mp4v"
 speed_region = [(int(w/3),int(4*h/5)),(w,int(4*h/5)),(w,0),(int(w/3),0)]
 speed = SpeedEstimator(model="yolo11n.pt", region=speed_region, show=False)
 
-frame_speeds=[]
+frame_speeds = []
+start_time = time.time()
+
 while cap.isOpened():
     success, im0 = cap.read()
+    # Exit loop after 15 seconds
+    if time.time() - start_time > 15:
+        print("Exiting loop after 15 seconds.")
+        break
 
     if success:
         out = speed.estimate_speed(im0)
         # Get only values not equal to 0 and convert to mph
         # 1 km = 0.621371 mi
-        frame_speed = [i*0.621371 for i in speed.spd.values() if i != 0]
+        frame_speed = [i * 0.621371 for i in speed.spd.values() if i != 0]
         frame_speeds = frame_speeds + frame_speed
 
         video_writer.write(im0)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
+
         continue
 
     print("Video frame is empty or video processing has been successfully completed.")
