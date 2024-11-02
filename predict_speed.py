@@ -3,10 +3,10 @@ from ultralytics.solutions import SpeedEstimator
 from numpy import mean
 from pandas import DataFrame
 
-# Choose video and create name for output file
-input_video_file = ""
-output_video_file = ""
-output_results = ""
+# Choose video and create name for output files
+input_video_file = ".avi"
+output_video_file = ".avi"
+output_csv = ".csv"
 
 # Load video and get width, height, fps
 cap = cv2.VideoCapture(input_video_file)
@@ -49,4 +49,4 @@ traffic_speed = mean(frame_speeds)
 
 # Save results
 results = DataFrame({'n_cars':n_cars,'traffic_speed':traffic_speed},index=[0])
-results.to_csv(output_results,index=False)
+results.to_csv(output_csv,index=False)
