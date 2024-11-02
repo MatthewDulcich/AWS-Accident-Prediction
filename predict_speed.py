@@ -4,9 +4,9 @@ from numpy import mean
 from pandas import DataFrame
 
 # Choose video and create name for output files
-input_video_file = ".avi"
-output_video_file = ".avi"
-output_csv = ".csv"
+input_video_file = "cctv052x2004080516x01638.avi"
+output_video_file = "test.mp4"
+output_csv = "test.csv"
 
 # Load video and get width, height, fps
 cap = cv2.VideoCapture(input_video_file)
@@ -50,3 +50,4 @@ traffic_speed = mean(frame_speeds)
 # Save results
 results = DataFrame({'n_cars':n_cars,'traffic_speed':traffic_speed},index=[0])
 results.to_csv(output_csv,index=False)
+print("Results saved to",output_csv)
