@@ -4,8 +4,8 @@ from numpy import mean
 from pandas import DataFrame
 
 # Choose video and create name for output files
-input_video_file = ".avi"
-output_video_file = ".avi"
+input_video_file = "" # .avi or .mp4
+output_video_file = "" # .avi or .mp4
 output_csv = ".csv"
 
 # Load video and get width, height, fps
