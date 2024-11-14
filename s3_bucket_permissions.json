@@ -1,0 +1,21 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::<account_id_user1>:user/<iam_name_user1>",
+                    "arn:aws:iam::<account_id_user2>:user/<iam_name_user2>"
+                ]
+            },
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": ["arn:aws:s3:::<bucket_name>",
+            "arn:aws:s3:::<bucket_name>/*"]
+        }
+    ]
+}
