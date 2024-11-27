@@ -1,0 +1,41 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"sagemaker:CreateTrainingJob",
+				"sagemaker:DescribeTrainingJob",
+				"sagemaker:ListTrainingJobs",
+				"sagemaker:CreateModel",
+				"sagemaker:DescribeModel",
+				"sagemaker:InvokeEndpoint",
+				"sagemaker:DeleteModel",
+				"sagemaker:CreateEndpointConfig",
+				"sagemaker:CreateEndpoint",
+				"sagemaker:UpdateEndpoint",
+				"sagemaker:DeleteEndpoint",
+				"sagemaker:DeleteEndpointConfig",
+				"sagemaker:DescribeEndpoint",
+				"sagemaker:DescribeEndpointConfig",
+				"sagemaker:ListEndpoints",
+				"sagemaker:ListEndpointConfigs"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "iam:PassRole",
+			"Resource": "arn:aws:iam::559050226112:role/sagemaker_notebook_jupyter_lab"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"logs:DescribeLogStreams",
+				"logs:DescribeLogGroups",
+				"logs:GetLogEvents"
+			],
+			"Resource": "*"
+		}
+	]
+}
