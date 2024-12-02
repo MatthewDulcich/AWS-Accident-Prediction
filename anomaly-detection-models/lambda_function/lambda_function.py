@@ -82,15 +82,25 @@ def preprocess_expanded_df(data):
 def lambda_handler(event, context):
     try:
         # Read the CSV from the event (assumes base64 encoded data if necessary)
-        csv_data = event['body']
+        # csv_data = event['body']
+
+        # Extract S3 bucket name and object key from the event
+        bucket_name = event['Records'][0]['s3']['bucket']['name']
+        object_key = event['Records'][0]['s3']['object']['key']
+
+        # Get the CSV file from S3
+        response = s3_client.get_object(Bucket=bucket_name, Key=object_key)
+        csv_data = response['Body'].read().decode('utf-8')
         
         # Decode and read CSV data into a pandas DataFrame
         decoded_data = io.StringIO(csv_data)
         df = pd.read_csv(decoded_data)
 
         # TEMP until we get the full data
-        df['date_time'] = pd.to_datetime('2024-11-18 15:45:00')
-        df['camera_id'] = '0'
+        # df['date_time'] = pd.to_datetime('2024-11-18 15:45:00')
+        # df['camera_id'] = '0'
+
+        df['date_time'] = pd.to_datetime(df['date_time'])
         
         # Process the datetime column without using strptime
         df[['year', 'month', 'day', 'hour', 'minute', 'is_weekend', 'week_of_month', 'season']] = \
