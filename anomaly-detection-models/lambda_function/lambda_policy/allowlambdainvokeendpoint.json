@@ -4,7 +4,7 @@
         {
             "Effect": "Allow",
             "Action": "sagemaker:InvokeEndpoint",
-            "Resource": "arn:aws:sagemaker:us-east-1:559050226112:endpoint/randomcutforest-2024-12-02-03-21-04-859"
+            "Resource": "arn:aws:sagemaker:us-east-1:559050226112:endpoint/*"
         }
     ]
 }
