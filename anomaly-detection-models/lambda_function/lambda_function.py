@@ -110,7 +110,7 @@ def lambda_handler(event, context):
         
         # Invoke the SageMaker endpoint
         response = sagemaker_client.invoke_endpoint(
-            EndpointName='randomcutforest-2024-12-02-03-21-04-859',  # Replace with your endpoint name
+            EndpointName='randomcutforest-2024-12-02-16-54-15-915',  # Replace with your endpoint name
             ContentType='text/csv',
             Body=input_data_csv
         )
@@ -124,8 +124,11 @@ def lambda_handler(event, context):
         # Convert the prediction results into a DataFrame
         results_df = pd.DataFrame(prediction_results, columns=['score'])
 
+        # Concatenate the original DataFrame with prediction results
+        df_with_predictions = pd.concat([df, results_df], axis=1)
+
         # Convert the DataFrame to CSV
-        csv_output = results_df.to_csv(index=False)
+        csv_output = df_with_predictions.to_csv(index=False)
 
         # Specify the S3 bucket and file
         output_bucket = 'dulcichmsml650bucket'
@@ -137,10 +140,10 @@ def lambda_handler(event, context):
             existing_csv = s3_response['Body'].read().decode('utf-8')
             existing_df = pd.read_csv(io.StringIO(existing_csv))
             # Append the new data
-            final_df = pd.concat([existing_df, results_df], ignore_index=True)
+            final_df = pd.concat([existing_df, df_with_predictions], ignore_index=True)
         except s3_client.exceptions.NoSuchKey:
             # If the file does not exist, just use the new data
-            final_df = results_df
+            final_df = df_with_predictions
 
         # Convert the final DataFrame to CSV
         final_csv = final_df.to_csv(index=False)
