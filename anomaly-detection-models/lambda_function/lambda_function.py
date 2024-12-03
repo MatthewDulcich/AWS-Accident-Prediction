@@ -68,13 +68,23 @@ def preprocess_expanded_df(data):
     data.loc[data['traffic_speed'] == -1, 'traffic_speed'] = 0
 
     # Convert columns to numeric and handle any errors
-    numerical_columns = ["n_cars", "traffic_speed", "camera_id", "is_weekend"]
+    numerical_columns = ["n_cars", "traffic_speed", "is_weekend"]
     for column in numerical_columns:
         data[column] = pd.to_numeric(data[column], errors='coerce')
         # Replace NaNs created by conversion errors with a default value (e.g., 0 or the mean)
         data[column].fillna(0, inplace=True)
     
     data = custom_standard_scaler(data, numerical_columns)  # Using custom scaler here
+
+        # Define the known camera_ids
+    known_camera_ids = ['a3000f3401a1000b005dd336c4235c0a', '5a01ab71004500400063d336c4235c0a']
+    
+    # Replace any camera_id not in the known list with 'unknown_camera'
+    data['camera_id'] = data['camera_id'].apply(lambda x: x if x in known_camera_ids else 'unknown_camera')
+
+    # One-hot encode the 'camera_id' column
+    data = pd.get_dummies(data, columns=["camera_id"], drop_first=False)
+    
     
     return data
 
@@ -120,7 +130,7 @@ def lambda_handler(event, context):
         
         # Invoke the SageMaker endpoint
         response = sagemaker_client.invoke_endpoint(
-            EndpointName='randomcutforest-2024-12-02-16-54-15-915',  # Replace with your endpoint name
+            EndpointName='randomcutforest-2024-12-03-17-54-34-301',  # Replace with your endpoint name
             ContentType='text/csv',
             Body=input_data_csv
         )
