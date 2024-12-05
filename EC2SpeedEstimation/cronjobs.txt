@@ -1,0 +1,5 @@
+* * * * * python3 speed_estimation.py
+1-59/5 * * * * python3 speed_estimation.py
+2-59/5 * * * * python3 speed_estimation.py
+3-59/5 * * * * python3 speed_estimation.py
+4-59/5 * * * * python3 speed_estimation.py
