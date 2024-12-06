@@ -1,0 +1,20 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:PutObject",
+				"s3:ListBucket",
+				"s3:PutObjectAcl"
+			],
+			"Resource": [
+				"arn:aws:s3:::traffic-cam-bucket",
+				"arn:aws:s3:::traffic-cam-bucket/*",
+				"arn:aws:s3:::traffic-cam-bucket/ivs/v1/251040037814/c6JrOtfTo2OT/2024/11/13/1/49/cja83ujdN2gg/media/hls/160p30/*",
+				"arn:aws:s3:::converted-mp4-videos-bucket/*"
+			]
+		}
+	]
+}
