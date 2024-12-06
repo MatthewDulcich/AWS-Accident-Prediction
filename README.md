@@ -12,4 +12,5 @@ We use EC2 instances to run the YOLOv11 model for object detection and speed est
 ### Lambda Video Processing
 This subdirectory contains the Lambda function for processing `.ts` video files and converting them into `.mp4` format using `ffmpeg`. It uses an event-driven architecture with S3 triggers to automate video preprocessing, making the files compatible with downstream tasks like speed estimation and anomaly detection. For detailed setup instructions, refer to the [Lambda Video Processing README](Lambda%20Video%20Processing/README.md).
 
-###
+### Frontend Gradio
+This subdirectory contains the files and file structure of the EC2 and S3 bucket used for the processing. The EC2 instance works with the watchdog library for file system monitoring and `ffmpeg` for the video conversion, Refer to the article (https://www.maskaravivek.com/post/how-to-install-ffmpeg-on-ec2-running-amazon-linux/) for installation of ffmpeg in the EC2 instance

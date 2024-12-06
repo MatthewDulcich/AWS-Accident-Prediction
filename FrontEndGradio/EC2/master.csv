@@ -1,0 +1,2 @@
+n_cars,traffic_speed,date_time,camera_id,year,month,day,hour,minute,is_weekend,week_of_month,season,score
+0,0,01/01/0001  12:00:00 AM,5a01ab71004500400063d336c4235c0a,1,1,1,0,0,FALSE,1,Winter,0
