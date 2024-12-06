@@ -1,0 +1,32 @@
+{
+    "Version": "2012-10-17",
+    "Id": "default",
+    "Statement": [
+        {
+            "Sid": "676206924186_event_permissions_from_converted-mp4-videos-bucket_for_ts_to_mp4_batch_convertor",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "s3.amazonaws.com"
+            },
+            "Action": "lambda:InvokeFunction",
+            "Resource": "arn:aws:lambda:us-east-1:676206924186:function:ts_to_mp4_batch_convertor",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceAccount": "676206924186"
+                },
+                "ArnLike": {
+                    "AWS:SourceArn": "arn:aws:s3:::converted-mp4-videos-bucket"
+                }
+            }
+        },
+        {
+            "Sid": "allow-s3-invoke-lambda",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "s3.amazonaws.com"
+            },
+            "Action": "lambda:InvokeFunction",
+            "Resource": "arn:aws:lambda:us-east-1:676206924186:function:ts_to_mp4_batch_convertor"
+        }
+    ]
+}
