@@ -11,3 +11,5 @@ We use EC2 instances to run the YOLOv11 model for object detection and speed est
 
 ### Lambda Video Processing
 This subdirectory contains the Lambda function for processing `.ts` video files and converting them into `.mp4` format using `ffmpeg`. It uses an event-driven architecture with S3 triggers to automate video preprocessing, making the files compatible with downstream tasks like speed estimation and anomaly detection. For detailed setup instructions, refer to the [Lambda Video Processing README](Lambda%20Video%20Processing/README.md).
+
+###
