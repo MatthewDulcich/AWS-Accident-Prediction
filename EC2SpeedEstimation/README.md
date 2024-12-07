@@ -22,5 +22,8 @@ This bash script is similar to the one above, but is meant to run as a User Data
 ### requirements.txt  
 File containing python dependencies needed.
 
+### S3BucketPolicy.json
+Sample bucket policy used for connection with this EC2 instance and other parts of the pipeline. Not all users/roles specified are provided to avoid personal info.
+
 ### speed_estimation.py  
 This function uses the ultralytics YOLOv11n model to estimate the speeds of incoming videos. The function lists the input bucket contents from the previous minute, makes sure there isn't already output for those files, then runs the model on each of the videos outputting an annotated video with speeds and a csv with the average traffic speed, number of cars, time of video, and video ID. The video ID is currently specified for the camera we were looking at last, but can be changed to any and automatically changed if the ID is passed to the script as an argument (could be potential future work).
